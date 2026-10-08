@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#102A43" />
+    <meta name="description" content="Central TikTok — inteligência para encontrar produtos em alta e criar anúncios melhores." />
+    <title>Central TikTok | Inteligência para TikTok Shop</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand-lockup">
+          <div class="brand-mark"><span></span><span></span></div>
+          <div>
+            <div class="brand-name">Central TikTok</div>
+            <div class="brand-caption">Shop intelligence</div>
+          </div>
+        </div>
+
+        <div class="workspace-switcher" aria-label="Workspace atual">
+          <div class="workspace-avatar">CT</div>
+          <div class="workspace-copy"><strong>Minha operação</strong><span>Workspace principal</span></div>
+          <span class="chevron">⌄</span>
+        </div>
+
+        <nav class="main-nav" aria-label="Navegação principal">
+          <div class="nav-label">Workspace</div>
+          <a href="#overview" data-route="overview" class="nav-item active"><span class="nav-icon">⌂</span>Visão geral</a>
+          <a href="#trending" data-route="trending" class="nav-item"><span class="nav-icon">↗</span>Produtos em alta</a>
+          <a href="#products" data-route="products" class="nav-item"><span class="nav-icon">▦</span>Todos os produtos</a>
+          <a href="#saved" data-route="saved" class="nav-item"><span class="nav-icon">♡</span>Produtos salvos <span class="nav-count" id="savedCount">0</span></a>
+          <a href="#compare" data-route="compare" class="nav-item"><span class="nav-icon">⇄</span>Comparador</a>
+          <div class="nav-label section-gap">Inteligência</div>
+          <a href="#categories" data-route="categories" class="nav-item"><span class="nav-icon">◫</span>Categorias</a>
+          <a href="#sellers" data-route="sellers" class="nav-item"><span class="nav-icon">♙</span>Vendedores</a>
+          <a href="#creators" data-route="creators" class="nav-item"><span class="nav-icon">◎</span>Criadores</a>
+          <a href="#analytics" data-route="analytics" class="nav-item"><span class="nav-icon">⌁</span>Análises</a>
+          <a href="#prompts" data-route="prompts" class="nav-item"><span class="nav-icon">✦</span>Prompts e criativos</a>
+          <div class="nav-label section-gap">Sistema</div>
+          <a href="#history" data-route="history" class="nav-item"><span class="nav-icon">◷</span>Histórico de atualizações</a>
+          <a href="#settings" data-route="settings" class="nav-item"><span class="nav-icon">⚙</span>Configurações</a>
+            <a href="#integration" data-route="integration" class="nav-item"><span class="nav-icon">⌘</span>Integração TikTok Shop</a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="plan-card">
+            <div class="plan-top"><span class="plan-dot"></span><span>Modo demonstração</span></div>
+            <p>Conecte sua conta para substituir os exemplos por dados autorizados.</p>
+            <a href="#integration" class="plan-link">Configurar integração <span>→</span></a>
+          </div>
+          <div class="sidebar-user"><div class="user-avatar">JG</div><div><strong>João Gabriel</strong><span>Administrador</span></div><button class="icon-button" aria-label="Mais opções">•••</button></div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="mobile-menu icon-button" id="mobileMenu" aria-label="Abrir menu">☰</button>
+          <div class="breadcrumbs"><span>Workspace</span><b>/</b><strong id="breadcrumbCurrent">Visão geral</strong></div>
+          <div class="topbar-actions">
+            <div class="connection-pill"><span class="status-dot amber"></span><span>Demo ativo</span><span class="pill-divider"></span><span class="freshness" id="freshness">Atualizado agora</span></div>
+            <button class="outline-button" id="refreshButton"><span class="refresh-symbol">↻</span> Atualizar dados</button>
+            <button class="icon-button has-notification" aria-label="Notificações">♢<i></i></button>
+            <button class="icon-button" id="themeButton" aria-label="Alternar tema">☼</button>
+            <button class="icon-button" aria-label="Ajuda">?</button>
+          </div>
+        </header>
+
+        <div class="demo-notice"><span class="notice-icon">i</span><div><strong>Você está vendo dados demonstrativos.</strong> Conecte o TikTok Shop para analisar produtos e métricas da sua operação.</div><a href="#integration">Conectar conta <span>→</span></a><button class="notice-close" aria-label="Fechar aviso">×</button></div>
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        <section id="pageContent" class="page-content"></section>
+      </main>
+    </div>
+
+    <div class="compare-dock" id="compareDock" hidden>
+      <div><strong><span id="compareCount">0</span> produtos selecionados</strong><span>Escolha até 4 para comparar lado a lado.</span></div>
+      <div class="compare-dock-actions"><button class="text-button" id="clearCompare">Limpar</button><button class="primary-button" id="openCompare">Comparar agora <span>→</span></button></div>
+    </div>
+
+    <div class="modal-backdrop" id="detailModal" hidden>
+      <section class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+        <button class="modal-close" id="closeDetail" aria-label="Fechar detalhes">×</button>
+        <div id="detailContent"></div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop" id="compareModal" hidden>
+      <section class="compare-modal" role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+        <button class="modal-close" id="closeCompare" aria-label="Fechar comparador">×</button>
+        <div id="compareContent"></div>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
