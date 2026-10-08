@@ -2,6 +2,19 @@
 
 Esta versão da Central TikTok inicia em modo demonstração. O front-end já separa a origem dos dados e está preparado para trocar os exemplos por respostas da integração autorizada.
 
+Na operação normal, a interface não mostra os exemplos. Eles só ficam acessíveis quando o usuário abre explicitamente o modo de prévia com `?demo=1`.
+
+## O que a API oficial permite
+
+O Partner Center documenta endpoints para produtos, busca de produtos, desempenho de produtos, vendedores e integrações de afiliados. O acesso é condicionado à aplicação aprovada, à região e aos escopos autorizados. As APIs de desempenho de loja exigem um token OAuth de vendedor e os dados de analytics podem ter latência T-1; por isso a interface precisa mostrar a origem e o horário de cada dado.
+
+- [TikTok Shop Partner Center — desempenho de produtos](https://partner.tiktokshop.com/docv2/page/kpkfccsa)
+- [TikTok Shop Partner Center — buscar produtos](https://partner.tiktokshop.com/docv2/page/search-products-202309)
+- [TikTok Shop Partner Center — integração de afiliados](https://partner.tiktokshop.com/docv2/page/affiliate-integration)
+- [TikTok Research API — produtos TikTok Shop](https://developers.tiktok.com/docs/en/research-api-specs-query-tiktok-shop-products)
+
+Não existe um endpoint público e irrestrito que autorize este site a listar “tudo do TikTok Shop” sem uma conta/app com acesso. A aplicação deve trabalhar somente com os produtos, lojas e métricas que o token e os escopos concederem.
+
 ## Fluxo recomendado
 
 1. Criar uma aplicação no portal oficial de parceiros do TikTok Shop.

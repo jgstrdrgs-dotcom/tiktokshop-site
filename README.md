@@ -4,7 +4,8 @@ Console responsivo de inteligência para TikTok Shop: produtos em alta, análise
 
 ## Estado atual
 
-- A interface roda em modo demonstração, com os dados identificados como `Demonstração`.
+- A operação normal não exibe produtos fictícios: sem OAuth, o app mostra o estado `Nenhum dado real conectado`.
+- A prévia demonstrativa só é aberta de forma explícita com `?demo=1` e todos os dados ficam marcados como `Demonstração`.
 - Produtos salvos, listas, preferências de tema e rascunhos são persistidos no navegador nesta primeira versão.
 - A integração oficial está preparada na página **Integração TikTok Shop** e documentada em [`docs/tiktok-shop-integration.md`](./docs/tiktok-shop-integration.md).
 - O app não solicita senha e não mostra tokens.

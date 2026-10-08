@@ -123,3 +123,15 @@ document.getElementById('closeDetail').addEventListener('click',closeDetail); do
 window.addEventListener('hashchange',()=>{document.getElementById('sidebar').classList.remove('open');renderRoute();});
 if(settings.dark)document.body.classList.add('dark');
 renderRoute();
+
+// Segurança de dados: a operação normal não exibe fixtures como se fossem dados reais.
+// A prévia demonstrativa só fica disponível de forma explícita com ?demo=1.
+const realDataOnly = new URLSearchParams(location.search).get('demo') !== '1';
+const dataRoutes = new Set(['overview','trending','products','saved','compare','categories','sellers','creators','analytics','prompts','history']);
+function renderConnectionGate() {
+  const demoUrl = `${location.pathname}?demo=1#${route}`;
+  pageContent.innerHTML = header('Conecte sua conta oficial', 'Para mostrar produtos, vendedores e métricas reais, a Central TikTok precisa de uma autorização oficial do TikTok Shop.', '<a class="primary-button" href="#integration">Abrir integração <span>→</span></a>') + `<section class="section-card" style="max-width:900px"><div class="empty-state" style="border:0;padding:40px 15px 28px;background:transparent"><div class="empty-icon">⌘</div><h3>Nenhum dado real conectado</h3><p>A aplicação não raspa páginas públicas, não inventa métricas e não usa dados demonstrativos na operação normal. Conecte uma conta pelo fluxo OAuth oficial do TikTok Shop para carregar apenas os dados autorizados.</p><div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap"><a class="primary-button" href="#integration">Configurar OAuth oficial <span>→</span></a><a class="outline-button" href="${demoUrl}">Abrir prévia demonstrativa</a></div></div><div class="content-grid" style="margin-top:8px"><div class="insight-box"><strong>O que será real após a conexão</strong>Produtos, loja original, preços, estoque, pedidos, vendas e métricas retornadas pelos escopos autorizados da sua conta.</div><div class="insight-box"><strong>O que pode não estar disponível</strong>Qualquer campo ausente na API aparecerá como “Não disponível”, com origem e horário da última atualização.</div></div></section>`;
+}
+const originalRenderRoute = renderRoute;
+renderRoute = function() { if (realDataOnly && dataRoutes.has(route)) { document.querySelectorAll('.nav-item').forEach(a=>a.classList.toggle('active',a.dataset.route===route)); document.getElementById('breadcrumbCurrent').textContent=routeNames[route]||'Visão geral'; document.getElementById('savedCount').textContent=saved.length; renderConnectionGate(); window.scrollTo(0,0); } else { originalRenderRoute(); } };
+renderRoute();
